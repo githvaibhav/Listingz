@@ -84,13 +84,13 @@ DATABASES = {
         'ENGINE':'django.db.backends.postgresql',
         'NAME': 'litingz_user',
         'USER':'postgres',
-        'PASSWORD': '12345'
+        'PASSWORD': '12345'  
 
     },
 
     'listings':{
         'ENGINE':'django.db.backends.postgresql',
-        'NAME': 'listingz_listing',
+        'NAME': 'litingz_listings',
         'USER':'postgres',
         'PASSWORD': '12345'
 
@@ -98,7 +98,7 @@ DATABASES = {
 }
 
 
-DATABASE_ROUTERS=['user.router.AuthRouter']
+DATABASE_ROUTERS=['user.router.AuthRouter', 'listing.router.ListingRouter']
 
 
 # Password validation
@@ -145,6 +145,7 @@ MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        #'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication',
                                        ]
@@ -154,7 +155,7 @@ SIMPLE_JWT={
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
-    'AUTH_TOKEN_CLASSES': ('rest_frameworksimplejwt.tokens.AccessToken',)
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',)
 }
 
 # Default primary key field type
